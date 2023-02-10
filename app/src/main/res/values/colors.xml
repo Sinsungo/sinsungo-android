@@ -5,6 +5,31 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary 컬러 -->
+    <color name="primary">#5887f9</color>
+
+    <!-- 블루 계열 -->
+    <color name="dark_sky_blue">#3c82d9</color>
+    <color name="powder_blue">#b4cefe</color>
+
+    <!-- 그레이 계열 -->
+    <color name="brownish_grey">#707070</color>
+    <color name="light_grey">#c1c1c1</color>
+    <color name="extra_light_grey">#cdcdcd</color>
+    <color name="pale_grey">#f9fafd</color>
+
+    <!-- 블랙 계열 -->
+    <color name="black">#000000</color>
+    <color name="light_black">#121212</color>
+
+    <!-- 화이트 계열 -->
+    <color name="white">#ffffff</color>
+    <color name="dark_white">#f6f6f6</color>
+    <color name="extra_dark_white">#f0f0f0</color>
+
+    <!-- 레드 계열 -->
+    <color name="red">#cf0000</color>
+    <color name="pale_red">#d85140</color>
+
 </resources>
