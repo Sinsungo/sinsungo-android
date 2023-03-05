@@ -7,12 +7,20 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.animation.AnimationUtils
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions.*
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
@@ -29,6 +37,7 @@ import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var GoogleSignResultLauncher: ActivityResultLauncher<Intent>
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +68,18 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        // 구글 로그인 로직
+        val gso = Builder(DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        GoogleSignResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()){ result ->
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            handleSignInResult(task)
+        }
+
         with(binding) {
             // 카카오 로그인
             btnKakaoLogin.setOnClickListener {
@@ -73,6 +94,12 @@ class LoginActivity : AppCompatActivity() {
                         callback = kakaoCallback
                     )
                 }
+            }
+
+            // 구글 로그인
+            btnGoogleLogin.setOnClickListener {
+                var signIntent: Intent = mGoogleSignInClient.getSignInIntent()
+                GoogleSignResultLauncher.launch(signIntent)
             }
         }
     }
@@ -98,4 +125,22 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+            viewModel.setGoogleEmail(account?.email.toString())
+            viewModel.setGoogleToken(account?.idToken.toString())
+            viewModel.setGoogleTokenAuth(account?.serverAuthCode.toString())
+            viewModel.setGoogleNickName(account?.displayName.toString())
+            viewModel.setGoogleId(account?.id.toString())
+
+            Log.e("Google account Email",viewModel.getGoogleEmail())
+            Log.e("Google account Token",viewModel.getGoogleToken())
+            Log.e("Google account TokenAuth", viewModel.getGoogleTokenAuth())
+            Log.e("Google account NickName", viewModel.getGoogleNickName())
+            Log.e("Google account Id", viewModel.getGoogleId())
+        } catch (e: ApiException){
+            Log.e("Google account","signInResult:failed Code = " + e.statusCode)
+        }
+    }
 }

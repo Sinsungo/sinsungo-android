@@ -50,6 +50,9 @@ dependencies {
     // 카카오 로그인
     implementation 'com.kakao.sdk:v2-user:2.13.0'
 
+    // 구글 로그인
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
