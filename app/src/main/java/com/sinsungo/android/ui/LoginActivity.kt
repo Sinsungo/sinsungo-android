@@ -36,21 +36,19 @@ class LoginActivity : AppCompatActivity() {
 
         // anim 하나만으로 적용하면 이상하게 끊기는 이유를 모르겠습니다,,
         val anim = AnimationUtils.loadAnimation(this, R.anim.anim_translate_right)
-        val anim2 = AnimationUtils.loadAnimation(this, R.anim.anim_translate_right)
-        val anim3 = AnimationUtils.loadAnimation(this, R.anim.anim_translate_right)
         lifecycleScope.launch {
             with(binding) {
                 delay(100)
-                btnKakaoLogin.startAnimation(anim)
                 btnKakaoLogin.isVisible = true
+                btnKakaoLogin.startAnimation(anim)
 
-                delay(100)
-                binding.btnGoogleLogin.startAnimation(anim2)
+                delay(200)
                 btnGoogleLogin.isVisible = true
+                btnGoogleLogin.startAnimation(anim)
 
-                delay(100)
-                binding.btnAppleLogin.startAnimation(anim3)
+                delay(200)
                 btnAppleLogin.isVisible = true
+                btnAppleLogin.startAnimation(anim)
             }
         }
     }
