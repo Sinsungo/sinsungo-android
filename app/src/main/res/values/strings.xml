@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Sinsungo</string>
+    <string name="login_kakao_text">카카오 로그인</string>
+    <string name="login_google_text">Google 로그인</string>
+    <string name="login_apple_text">애플 로그인</string>
+
+    <string name="navi_home">냉장고</string>
+    <string name="navi_search">검색</string>
+    <string name="navi_cart">장바구니</string>
+    <string name="navi_info">내 정보</string>
+
+    <string name="home_toptext">%1$s의 냉장고</string>
 </resources>

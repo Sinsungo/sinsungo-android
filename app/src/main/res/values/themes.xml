@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/pale_grey</item>
     </style>
 
 </resources>
