@@ -3,8 +3,6 @@ package com.sinsungo.android.ui
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.animation.AnimationUtils
 import androidx.activity.result.ActivityResultLauncher
@@ -12,26 +10,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions.*
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
-import com.sinsungo.android.MainActivity
 import com.sinsungo.android.R
 import com.sinsungo.android.databinding.ActivityLoginBinding
-import com.sinsungo.android.databinding.ActivitySplashBinding
 import com.sinsungo.android.viewModel.LoginViewModel
-import com.sinsungo.android.viewModel.SplashViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -48,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
 
         // anim 하나만으로 적용하면 이상하게 끊기는 이유를 모르겠습니다,,
         val anim = AnimationUtils.loadAnimation(this, R.anim.anim_translate_right)

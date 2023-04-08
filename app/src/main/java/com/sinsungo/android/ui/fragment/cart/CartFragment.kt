@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sinsungo.android.R
@@ -12,7 +11,8 @@ import com.sinsungo.android.databinding.FragMainCartBinding
 import com.sinsungo.android.viewModel.MainViewModel
 
 class CartFragment : Fragment() {
-    private lateinit var binding: FragMainCartBinding
+    private var _binding: FragMainCartBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel by activityViewModels<MainViewModel>()
 
@@ -20,10 +20,13 @@ class CartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.frag_main_cart, container, false)
-
+        _binding = FragMainCartBinding.inflate(inflater, container, false)
 
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

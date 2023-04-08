@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sinsungo.android.R
@@ -12,7 +11,8 @@ import com.sinsungo.android.databinding.FragMainHomeBinding
 import com.sinsungo.android.viewModel.MainViewModel
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragMainHomeBinding
+    private var _binding: FragMainHomeBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel by activityViewModels<MainViewModel>()
 
@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.frag_main_home, container, false)
+        _binding = FragMainHomeBinding.inflate(inflater, container, false)
 
         initObserver()
 
@@ -33,5 +33,10 @@ class HomeFragment : Fragment() {
                 binding.tvHomeToptext.text = getString(R.string.home_toptext, viewModel.groupName.value)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

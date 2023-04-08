@@ -3,7 +3,6 @@ package com.sinsungo.android
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import com.seunggyu.stitch.ui.fragment.home.HomeFragment
 import com.seunggyu.stitch.ui.fragment.home.CartFragment
 import com.seunggyu.stitch.ui.fragment.home.InfoFragment
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
         init()
     }
