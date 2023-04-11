@@ -39,6 +39,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun init() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        Log.d("LOG","init")
 
         // anim 하나만으로 적용하면 이상하게 끊기는 이유를 모르겠습니다,,
         val anim = AnimationUtils.loadAnimation(this, R.anim.anim_translate_right)
@@ -88,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
 
             // 구글 로그인
             btnGoogleLogin.setOnClickListener {
-                var signIntent: Intent = mGoogleSignInClient.getSignInIntent()
+                val signIntent: Intent = mGoogleSignInClient.signInIntent
                 GoogleSignResultLauncher.launch(signIntent)
             }
         }
@@ -115,7 +118,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             viewModel.setGoogleEmail(account?.email.toString())

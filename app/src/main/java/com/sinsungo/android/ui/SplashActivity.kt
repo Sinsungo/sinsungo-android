@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         // 2초 지연
         lifecycleScope.launch {
             delay(2000)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
         }
     }
