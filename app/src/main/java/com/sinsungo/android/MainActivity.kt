@@ -7,6 +7,7 @@ import com.seunggyu.stitch.ui.fragment.home.HomeFragment
 import com.seunggyu.stitch.ui.fragment.home.CartFragment
 import com.seunggyu.stitch.ui.fragment.home.InfoFragment
 import com.sinsungo.android.databinding.ActivityMainBinding
+import com.sinsungo.android.databinding.ActivitySplashBinding
 import com.sinsungo.android.viewModel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         init()
     }
@@ -29,25 +31,25 @@ class MainActivity : AppCompatActivity() {
                         R.id.action_home -> {
                             supportFragmentManager
                                 .beginTransaction()
-                                .replace(binding.frameLayout.id, HomeFragment())
+                                .replace(R.id.frameLayout, HomeFragment())
                                 .commitAllowingStateLoss()
                         }
                         R.id.action_search -> {
                             supportFragmentManager
                                 .beginTransaction()
-                                .replace(binding.frameLayout.id, CartFragment())
+                                .replace(R.id.frameLayout, CartFragment())
                                 .commitAllowingStateLoss()
                         }
                         R.id.action_cart -> {
                             supportFragmentManager
                                 .beginTransaction()
-                                .replace(binding.frameLayout.id, CartFragment())
+                                .replace(R.id.frameLayout, CartFragment())
                                 .commitAllowingStateLoss()
                         }
                         R.id.action_info -> {
                             supportFragmentManager
                                 .beginTransaction()
-                                .replace(binding.frameLayout.id, InfoFragment())
+                                .replace(R.id.frameLayout, InfoFragment())
                                 .commitAllowingStateLoss()
                         }
                     }
